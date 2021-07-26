@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackpink Avatar</title>
+    <style>
+        .body {
+            height: 100vh;
+            text-align: center;
+            padding-top: 2em;
+        }
+        
+        .avatarFrame {
+            background-color: #F5A6B9;
+            height: 300px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 2em;
+        }
+        
+        .textUser {
+            border: 5px solid black;
+            padding: 10px 20px 10px 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href=" https://fonts.googleapis.com/css?family=Pacifico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+
+<body class="body">
+    <div class="content">
+        <label for="fname">Your name:</label>
+        <input type="text" id="yourname" name="fname" value=""><br>
+        <p>Enter text without symbol</p>
+        <br>
+        <div class="avatarFrame" id="avatarFrame">
+            <p class="textUser" id="textUser"></p>
+        </div>
+        <button type="button" class="btn btn-warning" id="ok">Download</button>
+    </div>
+
+    <footer class="footer" style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; font-size: 14px;">
+        <p>&copy; Copyright 2021 Instagram: teohiho</p>
+    </footer>
+</body>
+<script>
+    const log = document.getElementById('textUser');
+
+    document.addEventListener('keyup', logKey);
+
+    function logKey(e) {
+        log.innerHTML += ` ${e.code.slice(e.code.length-1,e.code.length)}`;
+    }
+    //---
+    $("#ok").click(function() {
+        html2canvas(document.getElementById('avatarFrame'), {
+            width: 1080,
+            height: 1080,
+            onrendered: function(canvas) {
+                // var imgData = canvas.toDataURL('image/png');
+                // var doc = new jsPDF('p', 'mm');
+                // doc.addImage(imgData, 'PNG', 10, 10);
+                // doc.save('C:\download.pdf');
+
+
+                var a = document.createElement('a');
+                // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
+                a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                a.download = 'teohiho_avatarblackpink.jpg';
+                a.click();
+            }
+        });
+    });
+</script>
+
+</html>
